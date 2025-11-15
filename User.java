@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class User {
+    // Metódo para conectar o banco de dados
     public Connection conectarBD() {
         Connection conn = null;
         try {
@@ -14,11 +15,13 @@ public class User {
             conn = DriverManager.getConnection(url);
         }catch (Exception e) { }
         return conn; }
-    public String nome="";
+    public String nome=""; // Variável que armazena o nome retornado do banco
     public boolean result = false;
+    // Método que verifica se existe um usuário com login e senha informados
     public boolean verificarUsuario(String login, String senha) {
-        String sql = "";
-        Connection conn = conectarBD();
+        String sql = ""; // String que vai armazenar a consulta SQL
+        Connection conn = conectarBD(); // Método de conexão
+        // Consulta SQL
         sql += "select nome from usuarios ";
         sql += "where login = " + " ' " + login + " ' ";
         sql += " and senha = " + " ' " + senha + "';";
@@ -30,5 +33,6 @@ public class User {
                 nome = rs.getString("nome");
             }
         } catch (Exception e) { }
+        // Retorna o resultado da verificação
         return result; }
 }
